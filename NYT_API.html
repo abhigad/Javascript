@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <script type="text/javascript">
+    function displayTopArticles(totalArticles = 3) {
+
+      var topic = 'national';
+      var url = `https://api.nytimes.com/svc/topstories/v2/${topic}.json`;
+      url += '?api-key=66fa7bed54ac4b6db03807e69bf5511c'
+
+      //The Fetch API provides a JavaScript interface for accessing 
+      //and manipulating parts of the HTTP pipeline, such as requests and responses. 
+      //It also provides a global fetch() method that provides an easy, 
+      //logical way to fetch resources asynchronously across the network
+      //<div class="d-flex p-2">I'm a flexbox container!</div>
+
+
+      //Just a friendly warning
+      if (totalArticles <= 0) {
+        let artSect = document.getElementById('articlesSection');
+        artSect.insertAdjacentHTML('beforeend', "Nothing To Read!!");
+        return;
+      }
+
+      fetch(url)
+        .then(function (response) {
+          // Parse response 
+
+          return response.json();
+        })
+        .then(function (data) {
+
+          if (totalArticles > 0) {
+
+
+            let maxArticles = totalArticles;
+
+
+            // If there is less articles, teh max will be total available 
+            if (data.results.length > 0 && data.results.length < maxArticles) {
+              maxArticles = data.results.length;
+            }
+
+            //this is our base <p> section
+            document.getElementById("articlesSection").innerHTML = "";
+
+            for (let i = 0; i < maxArticles; i++) {
+              // get article 
+              let article = data.results[i];
+
+              /*
+              flex Quickly manage the layout, alignment, and sizing of grid
+              columns, navigation, components, and more with a full 
+              suite of responsive flexbox utilities. 
+              For more complex implementations,
+              custom CSS may be necessary
+              */
+              // Create Article HTML structure
+              //Template literals are string literals allowing embedded expressions. ${i}
+              let articleHtml = `
+                    <div class="article">
+                       <input type="checkbox" id=${i}> Done Reading</input> 
+                       <div class="articleTitle">
+                            <h5>Article Number is : ${i}</h5>
+                            <h5>${article.title}</h5>
+                            <a target="_blank" href=${article.url}>
+                            Read full article</a>
+                        </div>
+                    <p id="abstract"> ${article.abstract}</p>
+                            <h6 id="author">${article.byline}</h6>
+                            <p>Published date: ${article.published_date}</p>
+                            <p>Social Tags : ${article.des_facet}</p>
+                    </div>
+                    `;
+
+              // append the article 
+              let artSect = document.getElementById('articlesSection');
+              artSect.insertAdjacentHTML('beforeend', articleHtml);
+            }
+          }
+
+        })
+        .catch(function (err) {
+
+          console.error(err)
+        }) 
+    }
+
+    function clearSelectedArticlesOnScreen() {
+
+      document.getElementById('textbox_id').value = 1;
+
+      //var checkedCbs = document.querySelectorAll('input[type="checkbox"]:checked');
+
+      var checkedCbs = document.querySelectorAll('input[type="checkbox"]:checked');
+
+      var ids = [];
+
+      //remove selected articles only
+      for (var i = 0; i < checkedCbs.length; i++)
+        ids.push(checkedCbs[i].id);
+
+      for (var i = 0; i < ids.length; i++) {
+        document.getElementById(ids[i]).parentNode.remove();
+
+      }
+
+
+    }
+
+    function clearAllArticlesOnScreen() {
+
+      document.getElementById('textbox_id').value = 1;
+
+
+      // Get an array of all articles 'div'
+      let articles = document.getElementsByClassName('article');
+      // store how any articles are initially
+      let totalArticles = articles.length;
+
+
+      // loop as many times as total articles
+      // but always remove the one in position zero
+      // Note: as articles are removed, they are shifted to position zero
+      for (let i = 0; i < totalArticles; i++) {
+        articles[0].remove();
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  How Many Articles Do you want to Read:
+  <input type="text" id="textbox_id" maxlength="2" size="2" value="1">
+  <br>
+  <br>ee
+
+  <button onclick="displayTopArticles(document.getElementById('textbox_id').value)">Read Articles</button>
+
+  <button onclick="clearSelectedArticlesOnScreen()">Clear Selected Articles</button>
+
+  <button onclick="clearAllArticlesOnScreen()">Clear All Articles</button>
+
+  <p id="articlesSection"></p>
+
+</body>
+
+</html>
