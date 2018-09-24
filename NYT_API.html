@@ -17,7 +17,7 @@
       //<div class="d-flex p-2">I'm a flexbox container!</div>
 
 
-      //Just a friendly warning
+      //Just a friendly warning when nothing to select
       if (totalArticles <= 0) {
         let artSect = document.getElementById('articlesSection');
         artSect.insertAdjacentHTML('beforeend', "Nothing To Read!!");
@@ -61,10 +61,10 @@
               //Template literals are string literals allowing embedded expressions. ${i}
               let articleHtml = `
                     <div class="article">
-                       <input type="checkbox" id=${i}> Done Reading</input> 
+                       
                        <div class="articleTitle">
-                            <h5>Article Number is : ${i}</h5>
-                            <h5>${article.title}</h5>
+                            <h6>Article Number is : ${i}</h6>
+                            <h3>${article.title}</h3>
                             <a target="_blank" href=${article.url}>
                             Read full article</a>
                         </div>
@@ -72,6 +72,8 @@
                             <h6 id="author">${article.byline}</h6>
                             <p>Published date: ${article.published_date}</p>
                             <p>Social Tags : ${article.des_facet}</p>
+                            <input type="checkbox" id=${i}> Done Reading</input> 
+                            <p>=======================================</p>
                     </div>
                     `;
 
@@ -136,7 +138,7 @@
   How Many Articles Do you want to Read:
   <input type="text" id="textbox_id" maxlength="2" size="2" value="1">
   <br>
-  <br>ee
+  <br>
 
   <button onclick="displayTopArticles(document.getElementById('textbox_id').value)">Read Articles</button>
 
