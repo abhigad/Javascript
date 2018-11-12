@@ -5,10 +5,10 @@
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript">
     function displayTopArticles(totalArticles = 3) {
-
+      
       var topic = 'national';
       var url = `https://api.nytimes.com/svc/topstories/v2/${topic}.json`;
-      url += '?api-key=66fa7bed54ac4b6db03807e69bf5511c'
+      url += '?api-key=2c5c150e3b734c509a3fe39a630130ed'
 
       //The Fetch API provides a JavaScript interface for accessing 
       //and manipulating parts of the HTTP pipeline, 
@@ -132,7 +132,7 @@
   </script>
 </head>
 
-<body>
+<body> 
 
   How Many Articles Do you want to Read from NYT:
   <input type="text" id="textbox_id" maxlength="2" size="2" value="1">
