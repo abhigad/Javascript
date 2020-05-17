@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/abhigad/Javascript#readme",
   "dependencies": {
-    "moment": "^2.25.3"
+    "moment": "^2.25.3",
+    "uniq": "^1.0.1"
   }
 }
