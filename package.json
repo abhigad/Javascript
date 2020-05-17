@@ -1,0 +1,25 @@
+{
+  "name": "testpackage",
+  "version": "1.0.0",
+  "description": "test package",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhigad/Javascript.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "abhigad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abhigad/Javascript/issues"
+  },
+  "homepage": "https://github.com/abhigad/Javascript#readme",
+  "dependencies": {
+    "moment": "^2.25.3"
+  }
+}
